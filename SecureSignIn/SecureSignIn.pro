@@ -36,3 +36,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    Resources/StyleSheets/gitkraken_cryogen.qss

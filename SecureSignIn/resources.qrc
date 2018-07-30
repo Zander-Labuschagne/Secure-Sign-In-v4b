@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>Resources/icon.png</file>
+        <file>Resources/StyleSheets/gitkraken_cryogen.qss</file>
+        <file>Resources/icons/eye/hide.svg</file>
+        <file>Resources/icons/eye/show.svg</file>
+        <file>Resources/icons/eye/close.png</file>
+        <file>Resources/icons/eye/open.png</file>
     </qresource>
 </RCC>

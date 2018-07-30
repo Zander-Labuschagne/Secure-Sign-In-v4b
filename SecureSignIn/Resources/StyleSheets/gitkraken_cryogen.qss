@@ -1,0 +1,17 @@
+QMainWindow {
+	background-color: #272a31;
+}
+
+QLabel {
+	color: #26c4dc;
+	background: #272a31;
+	font-family: DejaVu Sans Mono;
+	font-size: 8pt;
+}
+
+QLineEdit {
+	color: #26c4dc;
+	background: #1f2127;
+	font-family: DejaVu Sans Mono;
+	font-size: 8pt;
+}
