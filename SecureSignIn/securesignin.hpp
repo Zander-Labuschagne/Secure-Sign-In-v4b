@@ -5,11 +5,11 @@
 
 class SecureSignIn : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    SecureSignIn(QWidget *parent = 0);
-    ~SecureSignIn();
+	SecureSignIn(QWidget *parent = 0);
+	~SecureSignIn();
 };
 
 #endif // SECURESIGNIN_HPP
