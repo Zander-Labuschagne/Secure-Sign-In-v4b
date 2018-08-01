@@ -2,9 +2,9 @@
     <qresource prefix="/">
         <file>Resources/icon.png</file>
         <file>Resources/StyleSheets/gitkraken_cryogen.qss</file>
-        <file>Resources/icons/eye/hide.svg</file>
-        <file>Resources/icons/eye/show.svg</file>
-        <file>Resources/icons/eye/close.png</file>
-        <file>Resources/icons/eye/open.png</file>
+        <file>Resources/icons/eye/breeze/hide.svg</file>
+        <file>Resources/icons/eye/breeze/show.svg</file>
+        <file>Resources/icons/eye/la-capitaine/hide.svg</file>
+        <file>Resources/icons/eye/la-capitaine/show.svg</file>
     </qresource>
 </RCC>

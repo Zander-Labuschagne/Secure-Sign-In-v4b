@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QSlider>
 
 /*
@@ -35,6 +36,7 @@ private:
 	QLineEdit *psw_password;
 	QLineEdit *psw_key; //Normal Text edit box with echoMode property set to password. //TODO: Add eye button to text box to preview password
 	QSlider *sld_compact; //Slider being used as a toggle button :) <- way easier than java
+	QPushButton *btn_encrypt;
 
 private slots:
 	void view_password();

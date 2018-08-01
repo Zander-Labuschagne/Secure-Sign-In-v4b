@@ -772,10 +772,10 @@ qrc_resources.cpp: ../SecureSignIn/resources.qrc \
 		/usr/bin/rcc \
 		../SecureSignIn/Resources/icon.png \
 		../SecureSignIn/Resources/StyleSheets/gitkraken_cryogen.qss \
-		../SecureSignIn/Resources/icons/eye/close.png \
-		../SecureSignIn/Resources/icons/eye/open.png \
-		../SecureSignIn/Resources/icons/eye/show.svg \
-		../SecureSignIn/Resources/icons/eye/hide.svg
+		../SecureSignIn/Resources/icons/eye/breeze/show.svg \
+		../SecureSignIn/Resources/icons/eye/breeze/hide.svg \
+		../SecureSignIn/Resources/icons/eye/la-capitaine/show.svg \
+		../SecureSignIn/Resources/icons/eye/la-capitaine/hide.svg
 	/usr/bin/rcc -name resources ../SecureSignIn/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

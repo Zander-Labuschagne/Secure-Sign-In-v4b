@@ -15,8 +15,23 @@ QLineEdit {
 	font-family: DejaVu Sans Mono;
 	font-size: 9pt;
 	border-radius: 3px;
+	selection-color: rgba(0, 93, 255, 1);
 }
 
 QLineEdit:Focus {
-	border: 1px solid rgba(38, 196, 220, 1);
+	border: 1px solid rgba(0, 93, 255, 1);
+}
+
+QPushButton {
+	background: rgba(0, 93, 255, 0.15);
+	color: #26c4dc;
+	font-family: DejaVu Sans Mono;
+	font-size: 9pt;
+	border-radius: 3px;
+	border: 1px solid rgba(0, 93, 255, 1);
+}
+
+QPushButton:Hover {
+	background: rgba(0, 93, 255, 1);
+
 }
