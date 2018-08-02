@@ -54,7 +54,7 @@ void SecureSignIn::initialize_components()
 	psw_password->move(100, 105);
 	psw_password->setEchoMode(QLineEdit::Password);
 	psw_password->setClearButtonEnabled(true);
-	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/la-capitaine/show.svg"), QLineEdit::TrailingPosition);
+	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 	connect(preview_password, &QAction::triggered, this, &SecureSignIn::view_password);
 	psw_password->setStyleSheet(stylesheet);
 	psw_password->show();
@@ -65,7 +65,7 @@ void SecureSignIn::initialize_components()
 	psw_key->move(100, 140);
 	psw_key->setEchoMode(QLineEdit::Password);
 	psw_key->setClearButtonEnabled(true);
-	preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/breeze/show.svg"), QLineEdit::TrailingPosition);
+	preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 	connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
 	psw_password->setStyleSheet(stylesheet);
 	psw_key->show();
@@ -88,13 +88,13 @@ void SecureSignIn::view_password()
 		psw_password->setEchoMode(QLineEdit::Normal);
 		password_visible = true;
 		psw_password->removeAction(preview_password);
-		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/la-capitaine/hide.svg"), QLineEdit::TrailingPosition);
+		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/hide.svg"), QLineEdit::TrailingPosition);
 		connect(preview_password, &QAction::triggered, this, &SecureSignIn::view_password);
 	} else {
 		psw_password->setEchoMode(QLineEdit::Password);
 		password_visible = false;
 		psw_password->removeAction(preview_password);
-		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/la-capitaine/show.svg"), QLineEdit::TrailingPosition);
+		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 		connect(preview_password, &QAction::triggered, this, &SecureSignIn::view_password);
 	}
 }
@@ -105,13 +105,13 @@ void SecureSignIn::view_key()
 		psw_key->setEchoMode(QLineEdit::Normal);
 		key_visible = true;
 		psw_key->removeAction(preview_key);
-		preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/breeze/hide.svg"), QLineEdit::TrailingPosition);
+		preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/hide.svg"), QLineEdit::TrailingPosition);
 		connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
 	} else {
 		psw_key->setEchoMode(QLineEdit::Password);
 		key_visible = false;
 		psw_key->removeAction(preview_key);
-		preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/breeze/show.svg"), QLineEdit::TrailingPosition);
+		preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 		connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
 	}
 }
