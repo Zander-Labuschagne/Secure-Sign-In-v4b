@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = SecureSignIn1.0.0
-DISTDIR = /home/zander/GitHub/SecureSignIn-v4b/build-SecureSignIn-Desktop-Debug/.tmp/SecureSignIn1.0.0
+DISTDIR = /mansion/zander/GitHub/SecureSignIn/SecureSignIn-v4b/build-SecureSignIn-Desktop-Debug/.tmp/SecureSignIn1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -772,12 +772,8 @@ qrc_resources.cpp: ../SecureSignIn/resources.qrc \
 		/usr/bin/rcc \
 		../SecureSignIn/Resources/icon.png \
 		../SecureSignIn/Resources/StyleSheets/gitkraken_cryogen.qss \
-		../SecureSignIn/Resources/icons/eye/breeze/show.svg \
-		../SecureSignIn/Resources/icons/eye/breeze/hide.svg \
 		../SecureSignIn/Resources/icons/eye/yosa/show.svg \
-		../SecureSignIn/Resources/icons/eye/yosa/hide.svg \
-		../SecureSignIn/Resources/icons/eye/la-capitaine/show.svg \
-		../SecureSignIn/Resources/icons/eye/la-capitaine/hide.svg
+		../SecureSignIn/Resources/icons/eye/yosa/hide.svg
 	/usr/bin/rcc -name resources ../SecureSignIn/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -792,7 +788,7 @@ compiler_moc_header_clean:
 moc_securesignin.cpp: ../SecureSignIn/securesignin.hpp \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/zander/GitHub/SecureSignIn-v4b/SecureSignIn -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/8.1.1 -I/usr/include/c++/8.1.1/x86_64-pc-linux-gnu -I/usr/include/c++/8.1.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/include-fixed -I/usr/include ../SecureSignIn/securesignin.hpp -o moc_securesignin.cpp
+	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mansion/zander/GitHub/SecureSignIn/SecureSignIn-v4b/SecureSignIn -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/8.1.1 -I/usr/include/c++/8.1.1/x86_64-pc-linux-gnu -I/usr/include/c++/8.1.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/include-fixed -I/usr/include ../SecureSignIn/securesignin.hpp -o moc_securesignin.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

@@ -19,6 +19,7 @@ SecureSignIn::SecureSignIn(QWidget *parent) : QMainWindow(parent)
 	key = nullptr;
 	cipher_password = nullptr;
 	password_visible = false;
+	compact = false;
 
 	initialize_components();
 }
@@ -78,6 +79,28 @@ void SecureSignIn::initialize_components()
 	//TODO: Sit die icon in
 	btn_encrypt->setStyleSheet(stylesheet);
 	btn_encrypt->show();
+
+	//Label: Compact password switch label
+	lblCompact = new QLabel(this);
+	lblCompact->setFixedSize(110, 15);
+	lblCompact->move(270, 177);
+	lblCompact->setText("Compact Password: ");
+	lblCompact->setStyleSheet(stylesheet);
+	lblCompact->show();
+
+	//HorizontalSlider: Compact password switch
+	sld_compact = new QSlider(this);
+	sld_compact->setOrientation(Qt::Horizontal);
+	sld_compact->setFixedSize(30, 20);
+	sld_compact->move(390, 175);
+	sld_compact->setRange(0, 1);
+	sld_compact->setSingleStep(1);
+	sld_compact->setTickInterval(1);
+	sld_compact->setValue(0);
+	sld_compact->setTracking(false);
+	sld_compact->setStyleSheet(stylesheet);
+	sld_compact->show();
+	connect(sld_compact, SIGNAL(sliderPressed()), this, SLOT(switch_compact_password()));
 }
 
 
@@ -115,6 +138,20 @@ void SecureSignIn::view_key()
 		connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
 	}
 }
+
+void SecureSignIn::switch_compact_password()
+{
+	//TODO: Ek kan die range baie groter maak en 'n for gebruik met sleep om animasie op die switch te sit, sin() funksie met hoe amplitude?
+	//TODO: Sit styling by die switch en switch label en vervang die sweitch se lig blu met die donker
+	if (!compact) {
+		sld_compact->setValue(1);
+		compact = true;
+	} else {
+		sld_compact->setValue(0);
+		compact = false;
+	}
+}
+
 
 SecureSignIn::~SecureSignIn()
 {
