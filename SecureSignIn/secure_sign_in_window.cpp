@@ -1,4 +1,5 @@
-#include "securesignin.hpp"
+#include "secure_sign_in_window.hpp"
+#include "secure_sign_in.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -11,7 +12,7 @@
 
 //TODO: Add more themes and experiment, Cryogen Theme, JetBrains, GitKraken, Atom etc
 
-SecureSignIn::SecureSignIn(QWidget *parent) : QMainWindow(parent)
+SecureSignInWindow::SecureSignInWindow(QWidget *parent) : QMainWindow(parent)
 {
 //	setWindowTitle(tr("Secure Sign In v4.0")); //Wat doen die tr()?
 
@@ -24,7 +25,7 @@ SecureSignIn::SecureSignIn(QWidget *parent) : QMainWindow(parent)
 	initialize_components();
 }
 
-void SecureSignIn::initialize_components()
+void SecureSignInWindow::initialize_components()
 {
 	//Set up GUI controls
 	QFile stylesheet_file(":/Resources/StyleSheets/gitkraken_cryogen.qss");
@@ -56,7 +57,7 @@ void SecureSignIn::initialize_components()
 	psw_password->setEchoMode(QLineEdit::Password);
 	psw_password->setClearButtonEnabled(true);
 	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
-	connect(preview_password, &QAction::triggered, this, &SecureSignIn::view_password);
+	connect(preview_password, &QAction::triggered, this, &SecureSignInWindow::view_password);
 	psw_password->setStyleSheet(stylesheet);
 	psw_password->show();
 
@@ -67,7 +68,7 @@ void SecureSignIn::initialize_components()
 	psw_key->setEchoMode(QLineEdit::Password);
 	psw_key->setClearButtonEnabled(true);
 	preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
-	connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
+	connect(preview_key, &QAction::triggered, this, &SecureSignInWindow::view_key);
 	psw_password->setStyleSheet(stylesheet);
 	psw_key->show();
 
@@ -79,6 +80,13 @@ void SecureSignIn::initialize_components()
 	//TODO: Sit die icon in
 	btn_encrypt->setStyleSheet(stylesheet);
 	btn_encrypt->show();
+	connect(btn_encrypt, SIGNAL(clicked()), this, SLOT(encrypt_password()));
+//	connect(btn_encrypt, SIGNAL(click()), output_window, SLOT(show()));
+//	output_window = new OutputWindow(this); // Be sure to destroy your window somewhere
+//	output_window->setFixedSize(300, 200);
+//	output_window->setWindowTitle("Secure Sign In v4.0");
+
+
 
 	//Label: Compact password switch label
 	lblCompact = new QLabel(this);
@@ -112,41 +120,41 @@ void SecureSignIn::initialize_components()
 
 
 
-void SecureSignIn::view_password()
+void SecureSignInWindow::view_password()
 {
 	if (!password_visible) {
 		psw_password->setEchoMode(QLineEdit::Normal);
 		password_visible = true;
 		psw_password->removeAction(preview_password);
 		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/hide.svg"), QLineEdit::TrailingPosition);
-		connect(preview_password, &QAction::triggered, this, &SecureSignIn::view_password);
+		connect(preview_password, &QAction::triggered, this, &SecureSignInWindow::view_password);
 	} else {
 		psw_password->setEchoMode(QLineEdit::Password);
 		password_visible = false;
 		psw_password->removeAction(preview_password);
 		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
-		connect(preview_password, &QAction::triggered, this, &SecureSignIn::view_password);
+		connect(preview_password, &QAction::triggered, this, &SecureSignInWindow::view_password);
 	}
 }
 
-void SecureSignIn::view_key()
+void SecureSignInWindow::view_key()
 {
 	if (!key_visible) {
 		psw_key->setEchoMode(QLineEdit::Normal);
 		key_visible = true;
 		psw_key->removeAction(preview_key);
 		preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/hide.svg"), QLineEdit::TrailingPosition);
-		connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
+		connect(preview_key, &QAction::triggered, this, &SecureSignInWindow::view_key);
 	} else {
 		psw_key->setEchoMode(QLineEdit::Password);
 		key_visible = false;
 		psw_key->removeAction(preview_key);
 		preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
-		connect(preview_key, &QAction::triggered, this, &SecureSignIn::view_key);
+		connect(preview_key, &QAction::triggered, this, &SecureSignInWindow::view_key);
 	}
 }
 
-void SecureSignIn::switch_compact_password()
+void SecureSignInWindow::switch_compact_password()
 {
 	if (!compact) {
 		sld_compact->setValue(1);
@@ -157,18 +165,30 @@ void SecureSignIn::switch_compact_password()
 	}
 }
 
-void SecureSignIn::encrypt_password()
+void SecureSignInWindow::encrypt_password()
 {
-	if (!compact) {
-		sld_compact->setValue(1);
-		compact = true;
-	} else {
-		sld_compact->setValue(0);
-		compact = false;
-	}
+	SecureSignIn ssi;
+	char *cipher_password;
+
+	if (compact)
+		cipher_password =  ssi.encrypt(&(psw_password->text().toStdString().c_str()[0]), &(psw_key->text().toStdString().c_str()[0]), 12);
+	else
+		cipher_password =  ssi.encrypt(&(psw_password->text().toStdString().c_str()[0]), &(psw_key->text().toStdString().c_str()[0]), 32);
+
+	output_window = new OutputWindow(this, cipher_password);
+	output_window->setFixedSize(420, 130);
+	// Dalk moet die binne die ssiWindow se constructor wees soos in die voorbeeld...
+	output_window->setWindowTitle("Secure Sign In v4.0");
+	QIcon *cryogen_icon = new QIcon;
+	cryogen_icon->addFile(":/Resources/icon.png", QSize(1024, 1024));
+	output_window->setWindowIcon(*cryogen_icon);
+	output_window->setModal(true);
+//	output_window->show();
+	output_window->exec();
+	delete output_window;
 }
 
 
-SecureSignIn::~SecureSignIn()
+SecureSignInWindow::~SecureSignInWindow()
 {
 }

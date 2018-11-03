@@ -7,19 +7,21 @@
 #include <QPushButton>
 #include <QSlider>
 
+#include "output_window.hpp"
+
 /*
  * @author Zander Labuschagne
  * E-Mail: <zander.labuschagne@protonmail.ch>
  */
 
-class SecureSignIn : public QMainWindow
+class SecureSignInWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	SecureSignIn(QWidget *parent = 0);
+	SecureSignInWindow(QWidget *parent = 0);
 	void initialize_components();
-	~SecureSignIn();
+	~SecureSignInWindow();
 
 private:
 	QString *plain_password;
@@ -40,6 +42,7 @@ private:
 	QSlider *sld_compact; //Slider being used as a toggle button :) <- way easier than java
 	QPushButton *btn_encrypt;
 	QLabel *lbl_logo;
+	OutputWindow *output_window;
 
 private slots:
 	void view_password();

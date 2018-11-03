@@ -4,6 +4,10 @@
 #
 #-------------------------------------------------
 
+#QMAKE_CXXFLAGS += -lX11
+
+LIBS += -lX11
+
 QT       += core gui widgets
 
 TARGET = SecureSignIn
@@ -23,13 +27,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        securesignin.cpp \
-    output.cpp
+	main.cpp \
+    secure_sign_in_window.cpp \
+    output_window.cpp \
+    secure_sign_in.cpp \
+    tty.cpp \
+    x11_clipboard.cpp
 
 HEADERS += \
-        securesignin.hpp \
-    output.hpp
+    secure_sign_in_window.hpp \
+    output_window.hpp \
+    secure_sign_in.hpp \
+    tty.hpp \
+    x11_clipboard.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

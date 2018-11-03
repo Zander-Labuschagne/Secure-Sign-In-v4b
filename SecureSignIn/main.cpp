@@ -1,10 +1,10 @@
-#include "securesignin.hpp"
+#include "secure_sign_in_window.hpp"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication application(argc, argv);
-	SecureSignIn ssiWindow;
+	SecureSignInWindow ssiWindow;
 	//ssiWindow.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint); //Die werk nie?
 	ssiWindow.setFixedSize(440, 240);
 	// Dalk moet die binne die ssiWindow se constructor wees soos in die voorbeeld...
