@@ -101,6 +101,13 @@ void SecureSignIn::initialize_components()
 	sld_compact->setStyleSheet(stylesheet);
 	sld_compact->show();
 	connect(sld_compact, SIGNAL(sliderPressed()), this, SLOT(switch_compact_password()));
+
+	//Logo displayed in label
+	lbl_logo = new QLabel(this);
+	lbl_logo->setPixmap(QPixmap::fromImage(QImage(":Resources/cryogen.png").scaledToHeight(85, Qt::SmoothTransformation)));
+	lbl_logo->setFixedSize(320, 90);
+	lbl_logo->move(100, 10);
+	lbl_logo->show();
 }
 
 
@@ -141,8 +148,17 @@ void SecureSignIn::view_key()
 
 void SecureSignIn::switch_compact_password()
 {
-	//TODO: Ek kan die range baie groter maak en 'n for gebruik met sleep om animasie op die switch te sit, sin() funksie met hoe amplitude?
-	//TODO: Sit styling by die switch en switch label en vervang die sweitch se lig blu met die donker
+	if (!compact) {
+		sld_compact->setValue(1);
+		compact = true;
+	} else {
+		sld_compact->setValue(0);
+		compact = false;
+	}
+}
+
+void SecureSignIn::encrypt_password()
+{
 	if (!compact) {
 		sld_compact->setValue(1);
 		compact = true;

@@ -24,10 +24,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        securesignin.cpp
+        securesignin.cpp \
+    output.cpp
 
 HEADERS += \
-        securesignin.hpp
+        securesignin.hpp \
+    output.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

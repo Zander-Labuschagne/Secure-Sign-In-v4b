@@ -4,5 +4,6 @@
         <file>Resources/StyleSheets/gitkraken_cryogen.qss</file>
         <file>Resources/icons/eye/yosa/hide.svg</file>
         <file>Resources/icons/eye/yosa/show.svg</file>
+        <file>Resources/cryogen.png</file>
     </qresource>
 </RCC>

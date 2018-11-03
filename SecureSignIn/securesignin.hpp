@@ -39,11 +39,13 @@ private:
 	QLabel *lblCompact;
 	QSlider *sld_compact; //Slider being used as a toggle button :) <- way easier than java
 	QPushButton *btn_encrypt;
+	QLabel *lbl_logo;
 
 private slots:
 	void view_password();
 	void view_key();
 	void switch_compact_password();
+	void encrypt_password();
 };
 
 #endif // SECURESIGNIN_HPP
