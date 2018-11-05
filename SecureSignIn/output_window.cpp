@@ -1,5 +1,6 @@
 #include "output_window.hpp"
 #include "x11_clipboard.hpp"
+#include "tty.hpp"
 
 #include <QFile>
 
@@ -84,7 +85,7 @@ void OutputWindow::copy_password()
 	#ifdef __linux__  //__unix__ // all unices not linux or macOS; defined(_POSIX_VERSION) for POSIX system
 		copy_password_linux();
 	#elif __MACH__ //All Apple devices; TARGET_OS_IPHONE for iOS device; TARGET_OS_MAC for macOS
-		copy_password_macos(password);
+		copy_password_macos();
 	#elif _WIN32 //both windows 32-bit and 64-bit; _WIN64 is only 64-bit
 		copy_password_windows(password);
 	#endif
@@ -103,20 +104,20 @@ void OutputWindow::copy_password_linux()
 #elif __MACH__
 	void OutputWindow::copy_password_macos()
 	{
-		char *trimmed_password;
-		trimmed_password = (char*)malloc(256);
-		for (unsigned short xix = 0; *(password + xix) != '\0'; xix++)
-			*(trimmed_password + xix) = *(password + xix);
+//		char *trimmed_password;
+//		trimmed_password = (char*)malloc(256);
+//		for (unsigned short xix = 0; *(password + xix) != '\0'; xix++)
+//			*(trimmed_password + xix) = *(password + xix);
 
 		std::stringstream tty_command;
-		tty_command << "echo \"" << trimmed_password << "\" | pbcopy"; //Ek dink pbcopy is unix shell program om te copy. En ek dink die tty stringstream stuur na die terminal.
+		tty_command << "echo \"" << cipher_password << "\" | pbcopy"; //Ek dink pbcopy is unix shell program om te copy. En ek dink die tty stringstream stuur na die terminal.
 
 		TTY tty;
 		tty.execute_command(tty_command.str().c_str()); //ek dink die metode stuur commands na die terminal toe
 
 		time_t end = time(NULL) + 8; //set end time to current time + 8 seconds
 		while (time(NULL) <= end); //Wait for as long as current time is less than end time
-		free(trimmed_password);
+//		free(trimmed_password);
 		//std::stringstream tty_clear;
 		tty_command << "echo \"" << " " << "\" | pbcopy";
 		tty.execute_command(tty_command.str().c_str());
