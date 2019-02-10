@@ -1,6 +1,6 @@
 #include "output_window.hpp"
-#include "x11_clipboard.hpp"
-#include "tty.hpp"
+//#include "x11_clipboard.hpp"
+//#include "tty.hpp"
 
 #include <QFile>
 #include <QFontDatabase>

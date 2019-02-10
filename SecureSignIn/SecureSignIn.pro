@@ -6,7 +6,7 @@
 
 #QMAKE_CXXFLAGS += -lX11
 
-#LIBS += -lX11
+LIBS += -lX11
 
 QT       += core gui widgets
 

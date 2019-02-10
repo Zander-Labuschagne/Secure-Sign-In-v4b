@@ -194,7 +194,7 @@ void SecureSignInWindow::encrypt_password()
 //	output_window->show();
 	output_window->exec();
 	delete output_window;
-	//wait 8sec
+    //wait 8sec on new thread
 	WorkerThread *workerThread = new WorkerThread(this);
 	connect(workerThread, &WorkerThread::resultReady, this, &SecureSignInWindow::clear);
 	connect(workerThread, &WorkerThread::finished, workerThread, &QObject::deleteLater);
