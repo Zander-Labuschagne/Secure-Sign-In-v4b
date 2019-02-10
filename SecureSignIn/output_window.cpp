@@ -1,5 +1,6 @@
 #include "output_window.hpp"
-#include "x11_clipboard.hpp"
+//#include "x11_clipboard.hpp"
+//#include "tty.hpp"
 
 #include <QFile>
 #include <QFontDatabase>
@@ -77,17 +78,16 @@ void OutputWindow::view_password()
 void OutputWindow::ok()
 {
 	free(cipher_password);
+	free(clipboard);
 	this->close();
 }
 
 void OutputWindow::copy_password()
 {
 	clipboard->setText(cipher_password);
-//	free(cipher_password);
 	this->close();
 }
 
 OutputWindow::~OutputWindow()
 {
-//	free(cipher_password);
 }
