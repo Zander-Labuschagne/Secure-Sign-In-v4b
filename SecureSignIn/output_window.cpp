@@ -2,6 +2,7 @@
 #include "x11_clipboard.hpp"
 
 #include <QFile>
+#include <QFontDatabase>
 
 OutputWindow::OutputWindow(QWidget *parent, char *cipher_password) : QDialog(parent)
 {
@@ -14,6 +15,8 @@ void OutputWindow::initialize_components()
 {
 	//Set up GUI controls
 	QFile stylesheet_file(":/Resources/StyleSheets/gitkraken_cryogen.qss");
+	QFontDatabase::addApplicationFont(":/Resources/fonts/Iosevka Nerd Font Complete.ttf");
+	fnt_iosevka = QFont("Iosevka Nerd Font Complete", 14, 65);
 	stylesheet_file.open(QFile::ReadOnly);
 	QString stylesheet = QLatin1String(stylesheet_file.readAll());
 	this->setStyleSheet(stylesheet);
@@ -29,6 +32,7 @@ void OutputWindow::initialize_components()
 	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 	connect(preview_password, &QAction::triggered, this, &OutputWindow::view_password);
 	psw_password->setText(cipher_password);
+	psw_password->setFont(fnt_iosevka);
 	psw_password->show();
 
 	//PushButton: OK button
@@ -37,6 +41,7 @@ void OutputWindow::initialize_components()
 	btn_ok->move(250, 85);
 	btn_ok->setText("OK");
 	btn_ok->setStyleSheet(stylesheet);
+	btn_ok->setFont(fnt_iosevka);
 	btn_ok->show();
 	connect(btn_ok, SIGNAL(clicked()), this, SLOT(ok()));
 
@@ -46,6 +51,7 @@ void OutputWindow::initialize_components()
 	btn_copy->move(10, 85);
 	btn_copy->setText("Copy Password");
 	btn_copy->setStyleSheet(stylesheet);
+	btn_copy->setFont(fnt_iosevka);
 	btn_copy->show();
 	connect(btn_copy, SIGNAL(clicked()), this, SLOT(copy_password()));
 }

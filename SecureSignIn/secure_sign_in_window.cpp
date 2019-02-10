@@ -2,8 +2,8 @@
 #include "secure_sign_in.hpp"
 
 #include <QAction>
-#include <QDebug>
 #include <QFile>
+#include <QFontDatabase>
 
 /*
  * @author Zander Labuschagne
@@ -27,6 +27,8 @@ SecureSignInWindow::SecureSignInWindow(QWidget *parent) : QMainWindow(parent)
 void SecureSignInWindow::initialize_components()
 {
 	//Set up GUI controls
+	QFontDatabase::addApplicationFont(":/Resources/fonts/Iosevka Nerd Font Complete.ttf");
+	fnt_iosevka = QFont("Iosevka Nerd Font Complete", 14, 65);
 	QFile stylesheet_file(":/Resources/StyleSheets/gitkraken_cryogen.qss");
 	stylesheet_file.open(QFile::ReadOnly);
 	QString stylesheet = QLatin1String(stylesheet_file.readAll());
@@ -39,6 +41,7 @@ void SecureSignInWindow::initialize_components()
 	lbl_password->move(20, 110);
 	lbl_password->setText("Password:");
 	lbl_password->setStyleSheet(stylesheet);
+	lbl_password->setFont(fnt_iosevka);
 	lbl_password->show();
 
 	//Label: password key label
@@ -46,6 +49,7 @@ void SecureSignInWindow::initialize_components()
 	lbl_key->setFixedSize(40, 20);
 	lbl_key->move(20, 145);
 	lbl_key->setText("Key:");
+	lbl_key->setFont(fnt_iosevka);
 	lbl_key->show();
 
 	//LineEdit: Password box
@@ -58,6 +62,7 @@ void SecureSignInWindow::initialize_components()
 	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 	connect(preview_password, &QAction::triggered, this, &SecureSignInWindow::view_password);
 	psw_password->setStyleSheet(stylesheet);
+	psw_password->setFont(fnt_iosevka);
 	psw_password->show();
 
 	//LineEdit: Key password box
@@ -68,7 +73,8 @@ void SecureSignInWindow::initialize_components()
 	psw_key->setClearButtonEnabled(true);
 	preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 	connect(preview_key, &QAction::triggered, this, &SecureSignInWindow::view_key);
-	psw_password->setStyleSheet(stylesheet);
+	psw_key->setStyleSheet(stylesheet);
+	psw_key->setFont(fnt_iosevka);
 	psw_key->show();
 
 	//PushButton: Encrypt password button
@@ -78,6 +84,7 @@ void SecureSignInWindow::initialize_components()
 	btn_encrypt->setText("Encrypt Password");
 	//TODO: Sit die icon in
 	btn_encrypt->setStyleSheet(stylesheet);
+	btn_encrypt->setFont(fnt_iosevka);
 	btn_encrypt->show();
 	connect(btn_encrypt, SIGNAL(clicked()), this, SLOT(encrypt_password()));
 //	connect(btn_encrypt, SIGNAL(click()), output_window, SLOT(show()));
@@ -88,12 +95,13 @@ void SecureSignInWindow::initialize_components()
 
 
 	//Label: Compact password switch label
-	lblCompact = new QLabel(this);
-	lblCompact->setFixedSize(120, 15);
-	lblCompact->move(265, 176);
-	lblCompact->setText("Compact Password: ");
-	lblCompact->setStyleSheet(stylesheet);
-	lblCompact->show();
+	lbl_compact = new QLabel(this);
+	lbl_compact->setFixedSize(120, 15);
+	lbl_compact->move(265, 176);
+	lbl_compact->setText("Compact Password: ");
+	lbl_compact->setStyleSheet(stylesheet);
+	lbl_compact->setFont(fnt_iosevka);
+	lbl_compact->show();
 
 	//HorizontalSlider: Compact password switch
 	sld_compact = new QSlider(this);
@@ -165,8 +173,6 @@ void SecureSignInWindow::encrypt_password()
 {
 	SecureSignIn ssi;
 	char *cipher_password;
-
-	qDebug() << sld_compact->value();
 
 	if (sld_compact->value() == 1)
 		cipher_password =  ssi.encrypt(&(psw_password->text().toStdString().c_str()[0]), &(psw_key->text().toStdString().c_str()[0]), 12);

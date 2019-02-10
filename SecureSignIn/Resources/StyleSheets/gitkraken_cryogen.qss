@@ -9,14 +9,12 @@ QDialog {
 QLabel {
 	color: #26c4dc;
 	background: #272a31;
-	font-family: DejaVu Sans Mono;
 	font-size: 8pt;
 }
 
 QLineEdit {
 	color: #26c4dc;
 	background: #1f2127;
-	font-family: DejaVu Sans Mono;
 	font-size: 9pt;
 	border-radius: 3px;
 	selection-color: rgba(0, 93, 255, 1);
@@ -29,7 +27,6 @@ QLineEdit:Focus {
 QPushButton {
 	background: rgba(0, 93, 255, 0.15);
 	color: #26c4dc;
-	font-family: DejaVu Sans Mono;
 	font-size: 9pt;
 	border-radius: 3px;
 	border: 1px solid rgba(0, 93, 255, 1);

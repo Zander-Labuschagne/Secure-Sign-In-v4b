@@ -5,5 +5,6 @@
         <file>Resources/icons/eye/yosa/hide.svg</file>
         <file>Resources/icons/eye/yosa/show.svg</file>
         <file>Resources/cryogen.png</file>
+        <file>Resources/fonts/Iosevka Nerd Font Complete.ttf</file>
     </qresource>
 </RCC>

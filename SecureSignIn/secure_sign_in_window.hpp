@@ -33,11 +33,12 @@ private:
 	QAction *preview_key;
 
 	//GUI Controls
+	QFont fnt_iosevka;
 	QLabel *lbl_password;
 	QLabel *lbl_key;
 	QLineEdit *psw_password;
 	QLineEdit *psw_key; //Normal Text edit box with echoMode property set to password. //TODO: Add eye button to text box to preview password
-	QLabel *lblCompact;
+	QLabel *lbl_compact;
 	QSlider *sld_compact; //Slider being used as a toggle button :) <- way easier than java
 	QPushButton *btn_encrypt;
 	QLabel *lbl_logo;

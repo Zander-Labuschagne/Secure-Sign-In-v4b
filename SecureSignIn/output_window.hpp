@@ -17,6 +17,7 @@ private:
 	char* cipher_password;
 	bool password_visible;
 	QAction *preview_password;
+	QFont fnt_iosevka;
 
 	QLineEdit *psw_password;
 	QPushButton *btn_copy;
