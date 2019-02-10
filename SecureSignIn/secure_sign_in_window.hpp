@@ -1,6 +1,7 @@
 #ifndef SECURESIGNIN_HPP
 #define SECURESIGNIN_HPP
 
+#include <QGuiApplication>
 #include <QMainWindow>
 #include <QLabel>
 #include <QLineEdit>
@@ -29,6 +30,7 @@ private:
 	QString *cipher_password;
 	bool password_visible;
 	bool key_visible;
+	QClipboard *clipboard;
 	QAction *preview_password;
 	QAction *preview_key;
 
@@ -49,6 +51,7 @@ private slots:
 	void view_key();
 	void switch_compact_password();
 	void encrypt_password();
+	void clear();
 };
 
 #endif // SECURESIGNIN_HPP

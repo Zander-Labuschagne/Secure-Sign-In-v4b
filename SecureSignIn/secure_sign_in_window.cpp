@@ -1,9 +1,12 @@
 #include "secure_sign_in_window.hpp"
 #include "secure_sign_in.hpp"
+#include "workerthread.hpp"
 
 #include <QAction>
+//#include <QApplication>
 #include <QFile>
 #include <QFontDatabase>
+#include <QThread>
 
 /*
  * @author Zander Labuschagne
@@ -26,6 +29,7 @@ SecureSignInWindow::SecureSignInWindow(QWidget *parent) : QMainWindow(parent)
 
 void SecureSignInWindow::initialize_components()
 {
+	clipboard = QGuiApplication::clipboard();
 	//Set up GUI controls
 	QFontDatabase::addApplicationFont(":/Resources/fonts/Iosevka Nerd Font Complete.ttf");
 	fnt_iosevka = QFont("Iosevka Nerd Font Complete", 14, 65);
@@ -179,7 +183,7 @@ void SecureSignInWindow::encrypt_password()
 	else
 		cipher_password =  ssi.encrypt(&(psw_password->text().toStdString().c_str()[0]), &(psw_key->text().toStdString().c_str()[0]), 32);
 
-	output_window = new OutputWindow(this, cipher_password);
+	output_window = new OutputWindow(this, cipher_password, clipboard);
 	output_window->setFixedSize(420, 130);
 	// Dalk moet die binne die ssiWindow se constructor wees soos in die voorbeeld...
 	output_window->setWindowTitle("Secure Sign In v4.0");
@@ -190,9 +194,24 @@ void SecureSignInWindow::encrypt_password()
 //	output_window->show();
 	output_window->exec();
 	delete output_window;
+	//wait 8sec
+	WorkerThread *workerThread = new WorkerThread(this);
+	connect(workerThread, &WorkerThread::resultReady, this, &SecureSignInWindow::clear);
+	connect(workerThread, &WorkerThread::finished, workerThread, &QObject::deleteLater);
+	workerThread->start();
+}
+
+void SecureSignInWindow::clear()
+{
+	clipboard->clear();
+	free(cipher_password);
+	free(clipboard);
 }
 
 
 SecureSignInWindow::~SecureSignInWindow()
 {
+	clipboard->clear();
+	free(cipher_password);
+	free(clipboard);
 }

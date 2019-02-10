@@ -32,14 +32,16 @@ SOURCES += \
     output_window.cpp \
     secure_sign_in.cpp \
     tty.cpp \
-    x11_clipboard.cpp
+    x11_clipboard.cpp \
+    workerthread.cpp
 
 HEADERS += \
     secure_sign_in_window.hpp \
     output_window.hpp \
     secure_sign_in.hpp \
     tty.hpp \
-    x11_clipboard.hpp
+    x11_clipboard.hpp \
+    workerthread.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
