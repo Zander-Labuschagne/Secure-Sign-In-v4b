@@ -1,6 +1,7 @@
 #ifndef SECURESIGNIN_HPP
 #define SECURESIGNIN_HPP
 
+#include <QGuiApplication>
 #include <QMainWindow>
 #include <QLabel>
 #include <QLineEdit>
@@ -29,16 +30,17 @@ private:
 	QString *cipher_password;
 	bool password_visible;
 	bool key_visible;
-	bool compact;
+	QClipboard *clipboard;
 	QAction *preview_password;
 	QAction *preview_key;
 
 	//GUI Controls
+	QFont fnt_iosevka;
 	QLabel *lbl_password;
 	QLabel *lbl_key;
 	QLineEdit *psw_password;
 	QLineEdit *psw_key; //Normal Text edit box with echoMode property set to password. //TODO: Add eye button to text box to preview password
-	QLabel *lblCompact;
+	QLabel *lbl_compact;
 	QSlider *sld_compact; //Slider being used as a toggle button :) <- way easier than java
 	QPushButton *btn_encrypt;
 	QLabel *lbl_logo;
@@ -49,6 +51,7 @@ private slots:
 	void view_key();
 	void switch_compact_password();
 	void encrypt_password();
+	void clear();
 };
 
 #endif // SECURESIGNIN_HPP

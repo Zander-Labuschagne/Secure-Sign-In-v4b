@@ -3,18 +3,22 @@
 #include "tty.hpp"
 
 #include <QFile>
+#include <QFontDatabase>
 
-OutputWindow::OutputWindow(QWidget *parent, char *cipher_password) : QDialog(parent)
+OutputWindow::OutputWindow(QWidget *parent, char *cipher_password, QClipboard *clipboard) : QDialog(parent)
 {
 	OutputWindow::cipher_password = cipher_password;
+	OutputWindow::clipboard = clipboard;
 	initialize_components();
-
 }
 
 void OutputWindow::initialize_components()
 {
+	clipboard = QGuiApplication::clipboard();
 	//Set up GUI controls
 	QFile stylesheet_file(":/Resources/StyleSheets/gitkraken_cryogen.qss");
+	QFontDatabase::addApplicationFont(":/Resources/fonts/Iosevka Nerd Font Complete.ttf");
+	fnt_iosevka = QFont("Iosevka Nerd Font Complete", 14, 65);
 	stylesheet_file.open(QFile::ReadOnly);
 	QString stylesheet = QLatin1String(stylesheet_file.readAll());
 	this->setStyleSheet(stylesheet);
@@ -30,6 +34,7 @@ void OutputWindow::initialize_components()
 	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
 	connect(preview_password, &QAction::triggered, this, &OutputWindow::view_password);
 	psw_password->setText(cipher_password);
+	psw_password->setFont(fnt_iosevka);
 	psw_password->show();
 
 	//PushButton: OK button
@@ -38,6 +43,7 @@ void OutputWindow::initialize_components()
 	btn_ok->move(250, 85);
 	btn_ok->setText("OK");
 	btn_ok->setStyleSheet(stylesheet);
+	btn_ok->setFont(fnt_iosevka);
 	btn_ok->show();
 	connect(btn_ok, SIGNAL(clicked()), this, SLOT(ok()));
 
@@ -47,6 +53,7 @@ void OutputWindow::initialize_components()
 	btn_copy->move(10, 85);
 	btn_copy->setText("Copy Password");
 	btn_copy->setStyleSheet(stylesheet);
+	btn_copy->setFont(fnt_iosevka);
 	btn_copy->show();
 	connect(btn_copy, SIGNAL(clicked()), this, SLOT(copy_password()));
 }
@@ -74,22 +81,10 @@ void OutputWindow::ok()
 	this->close();
 }
 
-//void OutputWindow::copy_password()
-//{
-//	copy_password(cipher_password);
-//	free(cipher_password);
-//}
-
 void OutputWindow::copy_password()
 {
-	#ifdef __linux__  //__unix__ // all unices not linux or macOS; defined(_POSIX_VERSION) for POSIX system
-		copy_password_linux();
-	#elif __MACH__ //All Apple devices; TARGET_OS_IPHONE for iOS device; TARGET_OS_MAC for macOS
-		copy_password_macos();
-	#elif _WIN32 //both windows 32-bit and 64-bit; _WIN64 is only 64-bit
-		copy_password_windows(password);
-	#endif
-	free(cipher_password);
+	clipboard->setText(cipher_password);
+//	free(cipher_password);
 	this->close();
 }
 
@@ -104,20 +99,20 @@ void OutputWindow::copy_password_linux()
 #elif __MACH__
 	void OutputWindow::copy_password_macos()
 	{
-//		char *trimmed_password;
-//		trimmed_password = (char*)malloc(256);
-//		for (unsigned short xix = 0; *(password + xix) != '\0'; xix++)
-//			*(trimmed_password + xix) = *(password + xix);
+		char *trimmed_password;
+		trimmed_password = (char*)malloc(256);
+		for (unsigned short xix = 0; *(password + xix) != '\0'; xix++)
+			*(trimmed_password + xix) = *(password + xix);
 
 		std::stringstream tty_command;
-		tty_command << "echo \"" << cipher_password << "\" | pbcopy"; //Ek dink pbcopy is unix shell program om te copy. En ek dink die tty stringstream stuur na die terminal.
+		tty_command << "echo \"" << trimmed_password << "\" | pbcopy"; //Ek dink pbcopy is unix shell program om te copy. En ek dink die tty stringstream stuur na die terminal.
 
 		TTY tty;
 		tty.execute_command(tty_command.str().c_str()); //ek dink die metode stuur commands na die terminal toe
 
 		time_t end = time(NULL) + 8; //set end time to current time + 8 seconds
 		while (time(NULL) <= end); //Wait for as long as current time is less than end time
-//		free(trimmed_password);
+		free(trimmed_password);
 		//std::stringstream tty_clear;
 		tty_command << "echo \"" << " " << "\" | pbcopy";
 		tty.execute_command(tty_command.str().c_str());
@@ -205,4 +200,5 @@ void OutputWindow::copy_password_linux()
 
 OutputWindow::~OutputWindow()
 {
+//	free(cipher_password);
 }
