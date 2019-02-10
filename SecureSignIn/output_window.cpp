@@ -86,7 +86,7 @@ void OutputWindow::copy_password()
 	#elif __MACH__ //All Apple devices; TARGET_OS_IPHONE for iOS device; TARGET_OS_MAC for macOS
 		copy_password_macos(password);
 	#elif _WIN32 //both windows 32-bit and 64-bit; _WIN64 is only 64-bit
-		copy_password_windows(password);
+		copy_password_windows(password);q|k*oNs-mPw1QR,TS-0b7xQN0pOMGI
 	#endif
 	free(cipher_password);
 	this->close();

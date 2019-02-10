@@ -20,7 +20,6 @@ SecureSignInWindow::SecureSignInWindow(QWidget *parent) : QMainWindow(parent)
 	key = nullptr;
 	cipher_password = nullptr;
 	password_visible = false;
-	compact = false;
 
 	initialize_components();
 }
@@ -90,8 +89,8 @@ void SecureSignInWindow::initialize_components()
 
 	//Label: Compact password switch label
 	lblCompact = new QLabel(this);
-	lblCompact->setFixedSize(110, 15);
-	lblCompact->move(270, 177);
+	lblCompact->setFixedSize(120, 15);
+	lblCompact->move(265, 176);
 	lblCompact->setText("Compact Password: ");
 	lblCompact->setStyleSheet(stylesheet);
 	lblCompact->show();
@@ -156,13 +155,10 @@ void SecureSignInWindow::view_key()
 
 void SecureSignInWindow::switch_compact_password()
 {
-	if (!compact) {
+	if (sld_compact->value() == 0)
 		sld_compact->setValue(1);
-		compact = true;
-	} else {
+	else
 		sld_compact->setValue(0);
-		compact = false;
-	}
 }
 
 void SecureSignInWindow::encrypt_password()
@@ -170,7 +166,9 @@ void SecureSignInWindow::encrypt_password()
 	SecureSignIn ssi;
 	char *cipher_password;
 
-	if (compact)
+	qDebug() << sld_compact->value();
+
+	if (sld_compact->value() == 1)
 		cipher_password =  ssi.encrypt(&(psw_password->text().toStdString().c_str()[0]), &(psw_key->text().toStdString().c_str()[0]), 12);
 	else
 		cipher_password =  ssi.encrypt(&(psw_password->text().toStdString().c_str()[0]), &(psw_key->text().toStdString().c_str()[0]), 32);

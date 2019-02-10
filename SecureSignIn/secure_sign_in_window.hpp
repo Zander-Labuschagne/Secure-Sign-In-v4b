@@ -29,7 +29,6 @@ private:
 	QString *cipher_password;
 	bool password_visible;
 	bool key_visible;
-	bool compact;
 	QAction *preview_password;
 	QAction *preview_key;
 
