@@ -40,7 +40,7 @@ DISTNAME      = SecureSignIn1.0.0
 DISTDIR = /home/zander/GitLab/SecureSignIn/SecureSignIn-v4b/build-SecureSignIn-Desktop-Debug/.tmp/SecureSignIn1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core /usr/lib/libGL.so -lpthread   
+LIBS          = $(SUBLIBS) -lX11 -lQt5Widgets -lQt5Gui -lQt5Core /usr/lib/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -630,9 +630,7 @@ secure_sign_in_window.o: ../SecureSignIn/secure_sign_in_window.cpp ../SecureSign
 		../SecureSignIn/workerthread.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o secure_sign_in_window.o ../SecureSignIn/secure_sign_in_window.cpp
 
-output_window.o: ../SecureSignIn/output_window.cpp ../SecureSignIn/output_window.hpp \
-		../SecureSignIn/x11_clipboard.hpp \
-		../SecureSignIn/tty.hpp
+output_window.o: ../SecureSignIn/output_window.cpp ../SecureSignIn/output_window.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o output_window.o ../SecureSignIn/output_window.cpp
 
 secure_sign_in.o: ../SecureSignIn/secure_sign_in.cpp ../SecureSignIn/secure_sign_in.hpp
