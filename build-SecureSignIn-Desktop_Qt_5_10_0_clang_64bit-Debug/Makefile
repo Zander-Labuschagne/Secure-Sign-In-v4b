@@ -55,18 +55,22 @@ SOURCES       = ../SecureSignIn/main.cpp \
 		../SecureSignIn/output_window.cpp \
 		../SecureSignIn/secure_sign_in.cpp \
 		../SecureSignIn/tty.cpp \
-		../SecureSignIn/x11_clipboard.cpp qrc_resources.cpp \
+		../SecureSignIn/x11_clipboard.cpp \
+		../SecureSignIn/workerthread.cpp qrc_resources.cpp \
 		moc_secure_sign_in_window.cpp \
-		moc_output_window.cpp
+		moc_output_window.cpp \
+		moc_workerthread.cpp
 OBJECTS       = main.o \
 		secure_sign_in_window.o \
 		output_window.o \
 		secure_sign_in.o \
 		tty.o \
 		x11_clipboard.o \
+		workerthread.o \
 		qrc_resources.o \
 		moc_secure_sign_in_window.o \
-		moc_output_window.o
+		moc_output_window.o \
+		moc_workerthread.o
 DIST          = ../SecureSignIn/Resources/StyleSheets/gitkraken_cryogen.qss \
 		../../../Qt/5.10.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.10.0/clang_64/mkspecs/qdevice.pri \
@@ -258,12 +262,14 @@ DIST          = ../SecureSignIn/Resources/StyleSheets/gitkraken_cryogen.qss \
 		../SecureSignIn/output_window.hpp \
 		../SecureSignIn/secure_sign_in.hpp \
 		../SecureSignIn/tty.hpp \
-		../SecureSignIn/x11_clipboard.hpp ../SecureSignIn/main.cpp \
+		../SecureSignIn/x11_clipboard.hpp \
+		../SecureSignIn/workerthread.hpp ../SecureSignIn/main.cpp \
 		../SecureSignIn/secure_sign_in_window.cpp \
 		../SecureSignIn/output_window.cpp \
 		../SecureSignIn/secure_sign_in.cpp \
 		../SecureSignIn/tty.cpp \
-		../SecureSignIn/x11_clipboard.cpp
+		../SecureSignIn/x11_clipboard.cpp \
+		../SecureSignIn/workerthread.cpp
 QMAKE_TARGET  = SecureSignIn
 DESTDIR       = 
 TARGET        = SecureSignIn.app/Contents/MacOS/SecureSignIn
@@ -695,8 +701,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../SecureSignIn/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.10.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SecureSignIn/secure_sign_in_window.hpp ../SecureSignIn/output_window.hpp ../SecureSignIn/secure_sign_in.hpp ../SecureSignIn/tty.hpp ../SecureSignIn/x11_clipboard.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SecureSignIn/main.cpp ../SecureSignIn/secure_sign_in_window.cpp ../SecureSignIn/output_window.cpp ../SecureSignIn/secure_sign_in.cpp ../SecureSignIn/tty.cpp ../SecureSignIn/x11_clipboard.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../SecureSignIn/secure_sign_in_window.hpp ../SecureSignIn/output_window.hpp ../SecureSignIn/secure_sign_in.hpp ../SecureSignIn/tty.hpp ../SecureSignIn/x11_clipboard.hpp ../SecureSignIn/workerthread.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../SecureSignIn/main.cpp ../SecureSignIn/secure_sign_in_window.cpp ../SecureSignIn/output_window.cpp ../SecureSignIn/secure_sign_in.cpp ../SecureSignIn/tty.cpp ../SecureSignIn/x11_clipboard.cpp ../SecureSignIn/workerthread.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -738,10 +744,12 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt/5.10.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.10.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_secure_sign_in_window.cpp moc_output_window.cpp
+compiler_moc_header_make_all: moc_secure_sign_in_window.cpp moc_output_window.cpp moc_workerthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_secure_sign_in_window.cpp moc_output_window.cpp
-moc_secure_sign_in_window.cpp: ../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+	-$(DEL_FILE) moc_secure_sign_in_window.cpp moc_output_window.cpp moc_workerthread.cpp
+moc_secure_sign_in_window.cpp: ../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QGuiApplication \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
+		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
@@ -754,6 +762,8 @@ moc_secure_sign_in_window.cpp: ../../../Qt/5.10.0/clang_64/lib/QtWidgets.framewo
 		../SecureSignIn/output_window.hpp \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QAction \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QClipboard \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SecureSignIn/secure_sign_in_window.hpp \
@@ -763,8 +773,12 @@ moc_secure_sign_in_window.cpp: ../../../Qt/5.10.0/clang_64/lib/QtWidgets.framewo
 
 moc_output_window.cpp: ../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QAction \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QClipboard \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QGuiApplication \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
@@ -773,6 +787,13 @@ moc_output_window.cpp: ../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Heade
 		moc_predefs.h \
 		../../../Qt/5.10.0/clang_64/bin/moc
 	/Users/zander/Qt/5.10.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/zander/Qt/5.10.0/clang_64/mkspecs/macx-clang -I/Users/zander/GitLab/SecureSignIn-v4b/SecureSignIn -I/Users/zander/Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/zander/Qt/5.10.0/clang_64/lib/QtGui.framework/Headers -I/Users/zander/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/zander/Qt/5.10.0/clang_64/lib ../SecureSignIn/output_window.hpp -o moc_output_window.cpp
+
+moc_workerthread.cpp: ../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../SecureSignIn/workerthread.hpp \
+		moc_predefs.h \
+		../../../Qt/5.10.0/clang_64/bin/moc
+	/Users/zander/Qt/5.10.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/zander/Qt/5.10.0/clang_64/mkspecs/macx-clang -I/Users/zander/GitLab/SecureSignIn-v4b/SecureSignIn -I/Users/zander/Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/zander/Qt/5.10.0/clang_64/lib/QtGui.framework/Headers -I/Users/zander/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/zander/Qt/5.10.0/clang_64/lib ../SecureSignIn/workerthread.hpp -o moc_workerthread.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -793,6 +814,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 main.o: ../SecureSignIn/main.cpp ../SecureSignIn/secure_sign_in_window.hpp \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QGuiApplication \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QLabel \
@@ -806,13 +829,19 @@ main.o: ../SecureSignIn/main.cpp ../SecureSignIn/secure_sign_in_window.hpp \
 		../SecureSignIn/output_window.hpp \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QAction \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QClipboard \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QStyleFactory \
+		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qstylefactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../SecureSignIn/main.cpp
 
 secure_sign_in_window.o: ../SecureSignIn/secure_sign_in_window.cpp ../SecureSignIn/secure_sign_in_window.hpp \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QGuiApplication \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QLabel \
@@ -826,28 +855,37 @@ secure_sign_in_window.o: ../SecureSignIn/secure_sign_in_window.cpp ../SecureSign
 		../SecureSignIn/output_window.hpp \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QAction \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QClipboard \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SecureSignIn/secure_sign_in.hpp \
-		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../SecureSignIn/workerthread.hpp \
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qfile.h
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o secure_sign_in_window.o ../SecureSignIn/secure_sign_in_window.cpp
 
 output_window.o: ../SecureSignIn/output_window.cpp ../SecureSignIn/output_window.hpp \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QAction \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QClipboard \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QGuiApplication \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
 		../../../Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../SecureSignIn/x11_clipboard.hpp \
-		../SecureSignIn/tty.hpp \
 		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qfile.h
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.10.0/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o output_window.o ../SecureSignIn/output_window.cpp
 
 secure_sign_in.o: ../SecureSignIn/secure_sign_in.cpp ../SecureSignIn/secure_sign_in.hpp
@@ -859,6 +897,11 @@ tty.o: ../SecureSignIn/tty.cpp ../SecureSignIn/tty.hpp
 x11_clipboard.o: ../SecureSignIn/x11_clipboard.cpp ../SecureSignIn/x11_clipboard.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o x11_clipboard.o ../SecureSignIn/x11_clipboard.cpp
 
+workerthread.o: ../SecureSignIn/workerthread.cpp ../SecureSignIn/workerthread.hpp \
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qthread.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o workerthread.o ../SecureSignIn/workerthread.cpp
+
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
@@ -867,6 +910,9 @@ moc_secure_sign_in_window.o: moc_secure_sign_in_window.cpp
 
 moc_output_window.o: moc_output_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_output_window.o moc_output_window.cpp
+
+moc_workerthread.o: moc_workerthread.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_workerthread.o moc_workerthread.cpp
 
 ####### Install
 
