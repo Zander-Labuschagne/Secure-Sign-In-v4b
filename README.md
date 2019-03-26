@@ -22,6 +22,8 @@ iOS(iPhone) version: TBA
 
 iOS(iPad) version: TBA
 
+The logo and name on the application comes from an iWorks template, it is not a registered company name or logo, I just added it to make it look impressive.
+
 E-Mail: <zander.labuschagne@protonmail.ch>
 Copyright (C) 2019 Zander Labuschagne. This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
 
