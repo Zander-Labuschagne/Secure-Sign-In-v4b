@@ -31,4 +31,7 @@ TBC
 *(Feel free to create a Windows version, I will eventually do it myself when I get to it)*
 
 ## How to use application:
-TBC
+  1. Enter a password you will remember in the password box, preferably a strong and complicated password because this will influence the complexity of the resulting password.
+  2. Enter a key, such as google, facebook or whatever.
+  3. Click on Encrypt Password and the rest is self explanatory.
+  4. Some websites have limitations on the length of the passwords, hence the compact password toggle switch.
