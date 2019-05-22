@@ -6,7 +6,10 @@
 
 #QMAKE_CXXFLAGS += -lX11
 
-#LIBS += -lX11
+# add lX11 compile flag only if building on Linux
+linux-g++ | linux-g++-64 | linux-g++-32 {
+LIBS += -lX11
+}
 
 QT       += core gui widgets
 
