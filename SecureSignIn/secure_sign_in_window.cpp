@@ -205,13 +205,10 @@ void SecureSignInWindow::clear()
 {
 	clipboard->clear();
 	free(cipher_password);
-	free(clipboard);
 }
 
 
 SecureSignInWindow::~SecureSignInWindow()
 {
-	clipboard->clear();
-	free(cipher_password);
-	free(clipboard);
+	clear();
 }

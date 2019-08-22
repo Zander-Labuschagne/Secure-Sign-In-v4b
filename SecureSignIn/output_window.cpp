@@ -78,7 +78,6 @@ void OutputWindow::view_password()
 void OutputWindow::ok()
 {
 	free(cipher_password);
-	free(clipboard);
 	this->close();
 }
 
