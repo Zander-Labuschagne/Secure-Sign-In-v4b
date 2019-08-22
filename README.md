@@ -37,3 +37,8 @@ TBC
   2. Enter a key, such as google, facebook or whatever.
   3. Click on Encrypt Password and the rest is self explanatory.
   4. Some websites have limitations on the length of the passwords, hence the compact password toggle switch.
+
+#### Screens
+<img src="https://gitlab.com/Zander-Labuschagne/SecureSignIn-v4b/raw/master/screens/ssiv4b.png" alt="Main view. Enter password and key in text fields." width="300" align="middle"/>
+<img src="https://gitlab.com/Zander-Labuschagne/SecureSignIn-v4b/raw/master/screens/ssiv4b_output.png" alt="Output view showing output of example. Copy the password to memory for pasting, or reveal the password for type over." width="300" align="middle"/>
+
