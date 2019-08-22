@@ -64,13 +64,13 @@ void OutputWindow::view_password()
 		psw_password->setEchoMode(QLineEdit::Normal);
 		password_visible = true;
 		psw_password->removeAction(preview_password);
-		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/hide.svg"), QLineEdit::TrailingPosition);
+		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/hide.png"), QLineEdit::TrailingPosition);
 		connect(preview_password, &QAction::triggered, this, &OutputWindow::view_password);
 	} else {
 		psw_password->setEchoMode(QLineEdit::Password);
 		password_visible = false;
 		psw_password->removeAction(preview_password);
-		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
+		preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.png"), QLineEdit::TrailingPosition);
 		connect(preview_password, &QAction::triggered, this, &OutputWindow::view_password);
 	}
 }
@@ -78,7 +78,6 @@ void OutputWindow::view_password()
 void OutputWindow::ok()
 {
 	free(cipher_password);
-	free(clipboard);
 	this->close();
 }
 
