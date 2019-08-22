@@ -2,8 +2,6 @@
 
 This is a C++ GUI(Qt) application I have created in an attempt to improve my online account security. The user provides a password with an accompanying key that is unique to the website(or account) requiring the password, the application then provides a lengthy and complicated password to be used instead. The _b_ in the version code states that this is the GUI(Graphical User Interface) version where _a_ would be the CLI(Command Line Interface). Find the CLI version at https://gitlab.com/Zander-Labuschagne/SecureSignIn-v4a or https://github.com/Zander-Labuschagne/SecureSignIn-v4a
 
-## *This application is still being tested, there are a few known bugs*
-
 ### Benefits:
   - Remember one password for all sites, but all sites have different passwords.
   - Don't know the actual password which is entered in the password box on the website.
@@ -29,7 +27,7 @@ Copyright (C) 2019 Zander Labuschagne. This program is free software: you can re
 
 ## How to install:
 ### Linux:
-TBC
+No install, just run the AppImage file
 ### macOS:
 TBC  
 *(Feel free to create a Windows version, I will eventually do it myself when I get to it)*
