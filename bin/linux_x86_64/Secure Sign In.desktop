@@ -1,8 +1,0 @@
-#!/usr/bin/env xdg-open
-
-[Desktop Entry]
-Name="Secure Sign In"
-Exec=/home/zander/SecureSignIn
-Terminal=false
-Type=Application
-Name[af_ZA]=Secure Sign In.desktop

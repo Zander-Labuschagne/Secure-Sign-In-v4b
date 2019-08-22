@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Secure Sign In
+Comment=Aids in managing passwords
+Exec=SecureSignIn
+Icon=ssi
+Categories=Utility;
+GenericName=Aids in managing passwords
+Name[af_ZA]=Secure Sign In

@@ -63,7 +63,7 @@ void SecureSignInWindow::initialize_components()
 	psw_password->move(100, 105);
 	psw_password->setEchoMode(QLineEdit::Password);
 	psw_password->setClearButtonEnabled(true);
-	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
+	preview_password = psw_password->addAction(QIcon(":/Resources/icons/eye/yosa/show.png"), QLineEdit::TrailingPosition);
 	connect(preview_password, &QAction::triggered, this, &SecureSignInWindow::view_password);
 	psw_password->setStyleSheet(stylesheet);
 	psw_password->setFont(fnt_iosevka);
@@ -75,7 +75,7 @@ void SecureSignInWindow::initialize_components()
 	psw_key->move(100, 140);
 	psw_key->setEchoMode(QLineEdit::Password);
 	psw_key->setClearButtonEnabled(true);
-	preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.svg"), QLineEdit::TrailingPosition);
+	preview_key = psw_key->addAction(QIcon(":/Resources/icons/eye/yosa/show.png"), QLineEdit::TrailingPosition);
 	connect(preview_key, &QAction::triggered, this, &SecureSignInWindow::view_key);
 	psw_key->setStyleSheet(stylesheet);
 	psw_key->setFont(fnt_iosevka);
