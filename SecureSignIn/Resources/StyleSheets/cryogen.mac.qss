@@ -1,0 +1,37 @@
+QMainWindow {
+	background-color: #272a31;
+}
+
+QDialog {
+	background-color: #272a31;
+}
+
+QLabel {
+	color: #26c4dc;
+	background: #272a31;
+	font-size: 12pt;
+}
+
+QLineEdit {
+	color: #26c4dc;
+	background: #1f2127;
+	font-size: 11pt;
+	border-radius: 3px;
+	selection-color: rgba(0, 93, 255, 1);
+}
+
+QLineEdit:Focus {
+	border: 1px solid rgba(0, 93, 255, 1);
+}
+
+QPushButton {
+	background: rgba(0, 93, 255, 0.15);
+	color: #26c4dc;
+	font-size: 11pt;
+	border-radius: 3px;
+	border: 1px solid rgba(0, 93, 255, 1);
+}
+
+QPushButton:Hover {
+	background: rgba(0, 93, 255, 1);
+}

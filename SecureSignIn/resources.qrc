@@ -1,12 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file>Resources/icon.png</file>
-        <file>Resources/StyleSheets/gitkraken_cryogen.qss</file>
+        <file>Resources/StyleSheets/cryogen.linux.qss</file>
         <file>Resources/icons/eye/yosa/hide.svg</file>
         <file>Resources/icons/eye/yosa/show.svg</file>
         <file>Resources/cryogen.png</file>
         <file>Resources/fonts/Iosevka Nerd Font Complete.ttf</file>
         <file>Resources/icons/eye/yosa/hide.png</file>
         <file>Resources/icons/eye/yosa/show.png</file>
+        <file>Resources/StyleSheets/cryogen.mac.qss</file>
     </qresource>
 </RCC>

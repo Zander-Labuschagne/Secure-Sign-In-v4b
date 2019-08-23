@@ -33,7 +33,11 @@ void SecureSignInWindow::initialize_components()
 	//Set up GUI controls
 	QFontDatabase::addApplicationFont(":/Resources/fonts/Iosevka Nerd Font Complete.ttf");
 	fnt_iosevka = QFont("Iosevka Nerd Font Complete", 14, 65);
-	QFile stylesheet_file(":/Resources/StyleSheets/gitkraken_cryogen.qss");
+#if defined (__MACH__)
+	QFile stylesheet_file(":/Resources/StyleSheets/cryogen.mac.qss");
+#elif defined(_WIN32) || defined(__linux__)
+	QFile stylesheet_file(":/Resources/StyleSheets/cryogen.linux.qss");
+#endif
 	stylesheet_file.open(QFile::ReadOnly);
 	QString stylesheet = QLatin1String(stylesheet_file.readAll());
 	//MainWindow:

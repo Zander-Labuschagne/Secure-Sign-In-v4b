@@ -55,4 +55,5 @@ RESOURCES += \
     resources.qrc
 
 DISTFILES += \
-    Resources/StyleSheets/gitkraken_cryogen.qss
+    Resources/StyleSheets/gitkraken_cryogen.qss \
+    cryogen.mac.qss
